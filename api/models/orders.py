@@ -8,8 +8,11 @@ class Order(Base):
     __tablename__ = "orders"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    customer_name = Column(String(100))
-    order_date = Column(DATETIME, nullable=False, server_default=str(datetime.now()))
-    description = Column(String(300))
+    date = Column(DATETIME, server_default=str(datetime.now()))
+    status = Column(String(20))
+    total = Column(DECIMAL(10, 2), nullable=False)
+    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=False)
+    # WARNING: validation must happen on server before committing to db
+    items = Column(String(200), nullable=False)
 
-    order_details = relationship("OrderDetail", back_populates="order")
+    customer = relationship('Customer', back_populates='order')

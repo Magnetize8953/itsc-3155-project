@@ -1,6 +1,6 @@
 # TODO: remove unnecessary imports
 from . import orders, order_details, recipes, sandwiches, resources
-from . import customers, payments, reviews
+from . import customers, payments, reviews, menu, promotions
 from ..dependencies.database import engine
 
 
@@ -16,3 +16,5 @@ def index():
     customers.Base.metadata.create_all(engine)
     payments.Base.metadata.create_all(engine)
     reviews.Base.metadata.create_all(engine)
+    menu.Base.metadata.create_all(engine)
+    promotions.Base.metadata.create_all(engine)

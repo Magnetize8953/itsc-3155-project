@@ -12,4 +12,4 @@ class Promotion(Base):
     expire_date = Column(DATETIME, server_default=str(datetime.now() + timedelta(days=1)))
     item_id = Column(Integer, ForeignKey('menu.id'), nullable=False)
 
-    menu_item = relationship('Menu', back_populates='promotion')
+    menu = relationship('Menu', back_populates='promotion')

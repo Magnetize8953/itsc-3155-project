@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, DECIMAL
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 from ..dependencies.database import Base
 
@@ -12,6 +13,6 @@ class Menu(Base):
     calories = Column(Integer, nullable=False)
     category = Column(String(100), nullable=False)
     # WARNING: validation must happen on server before committing to db
-    resources = Column(String(200), nullable=False)
+    resources = Column(String(500), nullable=False)
 
     promotion = relationship('Promotion', back_populates='menu')

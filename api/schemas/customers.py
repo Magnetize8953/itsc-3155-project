@@ -7,7 +7,7 @@ class CustomerBase(BaseModel):
     email: Optional[str] = None
     phone_number: Optional[str] = None
     address: Optional[str] = None
-    payment_info: Optional[str] = None
+    payment_info: Optional[int] = None
 
 
 class CustomerCreate(CustomerBase):

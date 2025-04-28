@@ -13,14 +13,16 @@ def create(db: Session, request):
         resources=request.resources
     )
 
-    resource_list = db.query(resources_model.Resource.name).all()
 
     try:
         json_resources = json.loads(new_item.resources)
     except json.decoder.JSONDecodeError:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid JSON given for Resources")
 
+    resource_list = [i[0] for i in db.query(resources_model.Resource.name).all()]
+    print(resource_list)
     for key in json_resources:
+        print(key)
         if key not in resource_list:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Resource not found: {key}")
 

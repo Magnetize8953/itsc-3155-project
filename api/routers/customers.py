@@ -36,5 +36,5 @@ def delete(item_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/{item_id}/pay/{amount}")
-def pay(item_id: int, amount: float, db: Session = Depends(get_db)):
-    return controller.pay(db=db, item_id=item_id, amount=amount)
+def pay(item_id: int, amount: float, restaurant_id: int, db: Session = Depends(get_db)):
+    return controller.pay(db=db, item_id=item_id, restaurant_id=restaurant_id, amount=amount)

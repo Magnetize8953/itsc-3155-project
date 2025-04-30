@@ -18,7 +18,7 @@ def create(db: Session, request):
         id=request.id,
         code=request.code,
         expire_date=request.expire_date,
-        item_id=request.item_id,
+        discount=request.discount,
     )
     try:
         db.add(new_promo)

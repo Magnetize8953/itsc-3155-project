@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends, FastAPI, status, Response
 from sqlalchemy.orm import Session
-from ..controllers import menu as controller
-from ..schemas import menu as schema
+from ..controllers import promotions as controller
+from ..schemas import promotions as schema
 from ..dependencies.database import engine, get_db
 
 router = APIRouter(
-    tags=['Orders'],
-    prefix="/orders"
+    tags=['Promotions'],
+    prefix="/promotions"
 )
 
 @router.post("/", response_model=schema.Promotion)
-def create(request: schema.MenuCreate, db: Session = Depends(get_db)):
+def create(request: schema.PromotionCreate, db: Session = Depends(get_db)):
     return controller.create(db=db, request=request)
 
 
@@ -20,11 +20,11 @@ def read_all(db: Session = Depends(get_db)):
 
 
 @router.put("/{item_id}", response_model=schema.Promotion)
-def update(item_id: int, request: schema.MenuUpdate, db: Session = Depends(get_db)):
-    return controller.update(db=db, request=request, item_id=item_id)
+def update(item_id: int, request: schema.PromotionUpdate, db: Session = Depends(get_db)):
+    return controller.update(db=db, request=request, promo_id=item_id)
 
 
 @router.delete("/{item_id}")
 def delete(item_id: int, db: Session = Depends(get_db)):
-    return controller.delete(db=db, item_id=item_id)
+    return controller.delete(db=db, promo_id=item_id)
 

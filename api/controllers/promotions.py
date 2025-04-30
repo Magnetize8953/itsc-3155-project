@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Response
+from fastapi import HTTPException, status, Response
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-from ..models import resources as model
+from ..models import promotions as model
 from ..models.promotions import Promotion as ModelPromotion
-from ..schemas.promotions import Promotion as SchemaPromotion, PromotionCreate, PromotionUpdate
+from ..schemas.promotions import PromotionUpdate
 
 def read_all(db: Session):
     try:
@@ -15,7 +15,6 @@ def read_all(db: Session):
 
 def create(db: Session, request):
     new_promo = model.Promotion(
-        id=request.id,
         code=request.code,
         expire_date=request.expire_date,
         discount=request.discount,

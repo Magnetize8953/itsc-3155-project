@@ -5,7 +5,7 @@ from pydantic import BaseModel
 class PromotionBase(BaseModel):
     code: str
     expire_date: datetime
-    item_id: int
+    discount: int
 
 
 class PromotionCreate(PromotionBase):

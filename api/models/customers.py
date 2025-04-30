@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, DECIMAL
 from sqlalchemy.orm import relationship
 from ..dependencies.database import Base
 
@@ -11,8 +11,7 @@ class Customer(Base):
     email = Column(String(100), unique=True, nullable=True)
     phone_number = Column(String(40), unique=True, nullable=True)
     address = Column(String(100), nullable=True)
-    payment_info = Column(Integer(), ForeignKey('payments.id'))
+    amount_owed = Column(DECIMAL(10, 2), nullable=True)
 
-    payment = relationship('Payment', back_populates='customer')
     review = relationship('Review', back_populates='customer')
     order = relationship('Order', back_populates='customer')

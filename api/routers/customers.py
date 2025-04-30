@@ -33,3 +33,8 @@ def update(item_id: int, request: schema.CustomerUpdate, db: Session = Depends(g
 @router.delete("/{item_id}")
 def delete(item_id: int, db: Session = Depends(get_db)):
     return controller.delete(db=db, item_id=item_id)
+
+
+@router.put("/{item_id}/pay/{amount}")
+def pay(item_id: int, amount: float, db: Session = Depends(get_db)):
+    return controller.pay(db=db, item_id=item_id, amount=amount)

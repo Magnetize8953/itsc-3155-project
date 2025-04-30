@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException, status, Response, Depends
 from ..models import customers as model
 from sqlalchemy.exc import SQLAlchemyError
+from decimal import Decimal
 
 def create(db: Session, request):
     new_item = model.Customer(
@@ -9,7 +10,7 @@ def create(db: Session, request):
         email=request.email,
         phone_number=request.phone_number,
         address=request.address,
-        payment_info=request.payment_info
+        amount_owed=request.amount_owed
     )
 
     try:
@@ -63,6 +64,22 @@ def delete(db: Session, item_id):
         if not item.first():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Id not found!")
         item.delete(synchronize_session=False)
+        db.commit()
+    except SQLAlchemyError as e:
+        error = str(e.__dict__['orig'])
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+def pay(db: Session, item_id, amount):
+    try:
+        item = db.query(model.Customer).filter(model.Customer.id == item_id)
+        if not item.first():
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Id not found!")
+        if item.first().amount_owed - Decimal(str(amount)) >= 0:
+            item.first().amount_owed -= Decimal(str(amount))
+        else:
+            item.first().amount_owed = 0
         db.commit()
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])

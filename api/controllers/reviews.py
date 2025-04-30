@@ -8,7 +8,7 @@ def create(db: Session, request):
     new_item = reviews_model.Review(
         text = request.text,
         rating = request.rating,
-        customer_id = request.customer_id
+        item_id = request.item_id
     )
 
     try:
@@ -29,9 +29,9 @@ def read_all(db: Session):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error)
     return result
 
-def read_one(db: Session, customer_id):
+def read_one(db: Session, item_id):
     try:
-        item = db.query(reviews_model.Review).filter(reviews_model.reviews.id == item_id).first()
+        item = db.query(reviews_model.Review).filter(reviews_model.Review.id == item_id).first()
         if not item:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Id not found!")
     except SQLAlchemyError as e:
@@ -39,9 +39,9 @@ def read_one(db: Session, customer_id):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error)
     return item
 
-def update(db: Session, customer_id, request):
+def update(db: Session, item_id, request):
     try:
-        item = db.query(reviews_model.reviews).filter(reviews_model.reviews.id == customer_id)
+        item = db.query(reviews_model.Review).filter(reviews_model.Review.id == item_id)
         if not item.first():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Id not found!")
         update_data = request.dict(exclude_unset=True)
@@ -52,9 +52,9 @@ def update(db: Session, customer_id, request):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error)
     return item.first()
 
-def delete(db: Session, customer_id):
+def delete(db: Session, item_id):
     try:
-        item = db.query(reviews_model.Review).filter(reviews_model.Review.id == customer_id)
+        item = db.query(reviews_model.Review).filter(reviews_model.Review.id == item_id)
         if not item.first():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Id not found!")
         item.delete(synchronize_session=False)

@@ -9,6 +9,7 @@ class OrderBase(BaseModel):
     total: float
     customer_id: int
     items: str
+    promo: str
 
 
 class OrderCreate(OrderBase):
@@ -21,6 +22,7 @@ class OrderUpdate(BaseModel):
     total: Optional[float] = None
     customer_id: Optional[int] = None
     items: Optional[str] = None
+    promo: Optional[str] = None
 
 
 class Order(OrderBase):

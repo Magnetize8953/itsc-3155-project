@@ -14,5 +14,6 @@ class Order(Base):
     customer_id = Column(Integer, ForeignKey('customers.id'), nullable=False)
     # WARNING: validation must happen on server before committing to db
     items = Column(String(200), nullable=False)
+    promo = Column(String(100), nullable=True)
 
     customer = relationship('Customer', back_populates='order')

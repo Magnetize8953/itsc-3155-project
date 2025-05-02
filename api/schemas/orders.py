@@ -13,17 +13,15 @@ class OrderBase(BaseModel):
 
 
 class OrderCreate(OrderBase):
-    pass
+    date: datetime
+    status: str
+    customer_id: int
+    items: str
+    promo: str
 
 
 class OrderUpdate(BaseModel):
-    date: Optional[datetime] = None
     status: Optional[str] = None
-    total: Optional[float] = None
-    customer_id: Optional[int] = None
-    items: Optional[str] = None
-    promo: Optional[str] = None
-
 
 class Order(OrderBase):
     id: int

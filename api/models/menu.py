@@ -14,3 +14,5 @@ class Menu(Base):
     category = Column(String(100), nullable=False)
     # WARNING: validation must happen on server before committing to db
     resources = Column(String(500), nullable=False)
+
+    review = relationship('Review', back_populates='menu')

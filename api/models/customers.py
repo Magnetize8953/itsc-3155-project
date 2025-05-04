@@ -13,5 +13,4 @@ class Customer(Base):
     address = Column(String(100), nullable=True)
     amount_owed = Column(DECIMAL(10, 2), nullable=True)
 
-    review = relationship('Review', back_populates='customer')
     order = relationship('Order', back_populates='customer')

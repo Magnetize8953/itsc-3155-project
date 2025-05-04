@@ -5,7 +5,7 @@ from pydantic import BaseModel
 class ReviewBase(BaseModel):
     text: str
     rating: int
-    customer_id: int
+    item_id: int
 
 
 class ReviewCreate(ReviewBase):

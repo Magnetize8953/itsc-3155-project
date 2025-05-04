@@ -1,10 +1,11 @@
 from datetime import datetime
+from typing import Optional
 from pydantic import BaseModel
 
 
 class PromotionBase(BaseModel):
     code: str
-    expire_date: datetime
+    expire_date: Optional[datetime] = None
     discount: int
 
 

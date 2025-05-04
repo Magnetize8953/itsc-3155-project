@@ -8,5 +8,5 @@ class Restaurant(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     total = Column(DECIMAL(10, 2), default=0.0)
-    op_date = Column(DATE, server_default=func.current_date())
+    op_date = Column(DATE, server_default=func.now())
     orders = Column(Integer, default=0)

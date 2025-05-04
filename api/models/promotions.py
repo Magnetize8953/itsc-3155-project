@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DATETIME
-from datetime import datetime, timedelta
+from sqlalchemy.sql import func
 from ..dependencies.database import Base
 
 
@@ -8,6 +8,8 @@ class Promotion(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     code = Column(String(100), nullable=False)
-    expire_date = Column(DATETIME, server_default=str(datetime.now() + timedelta(days=1)))
+    # mysql doesn't let you do date_add for defaults
+    # time is just an integer that gets parsed. time + 1000000 is right now tomorrow
+    expire_date = Column(DATETIME, server_default=func.now() + 1000000)
     discount = Column(Integer, nullable=False)
 

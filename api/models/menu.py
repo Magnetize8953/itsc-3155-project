@@ -16,3 +16,4 @@ class Menu(Base):
     resources = Column(String(500), nullable=False)
 
     promotion = relationship('Promotion', back_populates='menu')
+    review = relationship('Review', back_populates='menu')

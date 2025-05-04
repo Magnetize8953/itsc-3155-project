@@ -9,6 +9,6 @@ class Review(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     text = Column(String(500), nullable=False)
     rating = Column(Integer(), CheckConstraint('rating >= 0 AND rating <= 5'), nullable=False)
-    customer_id = Column(Integer(), ForeignKey('customers.id'), nullable=False)
+    item_id = Column(Integer(), ForeignKey('menu.id'), nullable=False)
 
-    customer = relationship('Customer', back_populates='review')
+    menu = relationship('Menu', back_populates='review')

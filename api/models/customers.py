@@ -14,5 +14,4 @@ class Customer(Base):
     payment_info = Column(Integer(), ForeignKey('payments.id'))
 
     payment = relationship('Payment', back_populates='customer')
-    review = relationship('Review', back_populates='customer')
     order = relationship('Order', back_populates='customer')

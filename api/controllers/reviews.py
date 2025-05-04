@@ -8,7 +8,7 @@ def create(db: Session, request):
     new_item = reviews_model.Review(
         text = request.text,
         rating = request.rating,
-        customer_id = request.customer_id
+        item_id = request.item_id
     )
 
     try:

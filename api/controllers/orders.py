@@ -35,7 +35,7 @@ def create(db: Session, request):
         for innerkey in menu_item_resources:
             #reducing resource
             resource = db.query(resource_model.Resource).filter(resource_model.Resource.name == innerkey).first()
-            resource.amount -= json_menu[key]
+            resource.amount -= menu_item_resources[innerkey] * json_menu[key]
 
         #set the total
         cost = menu_item.cost

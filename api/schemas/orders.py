@@ -12,8 +12,7 @@ class OrderBase(BaseModel):
     promo: str
 
 
-class OrderCreate(OrderBase):
-    date: datetime
+class OrderCreate(BaseModel):
     status: str
     customer_id: int
     items: str
